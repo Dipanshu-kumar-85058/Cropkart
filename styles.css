@@ -13,15 +13,23 @@ body {
 }
 
 /* Hidden utility */
-.hidden { display: none; }
+.hidden { display: none !important; }
+
+/* Full-page overlays for different screens */
+#splash, #roleSelect, #farmerForm, #consumerForm, #marketplace {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  overflow-y: auto;
+  background: #f1f8e9;
+  z-index: 10;
+}
 
 /* Splash Screen */
 #splash {
-  position: fixed;
-  top: 0; left: 0; width: 100%; height: 100%;
   background: linear-gradient(135deg, #a8e063, #56ab2f);
   display: flex; justify-content: center; align-items: center;
-  color: white; z-index: 1000;
+  color: white; z-index: 100;
 }
 
 .splash-content h1 {
@@ -46,18 +54,14 @@ body {
 
 @keyframes spin { 100% { transform: rotate(360deg); } }
 
-/* Login Page */
-#login {
-  display: flex; justify-content: center; align-items: center;
-  height: 100vh; background: #f1f8e9;
-}
-
+/* Login/Form Box */
 .login-box {
   background: white;
   padding: 30px;
   border-radius: 12px;
   box-shadow: 0 6px 12px rgba(0,0,0,0.2);
   width: 320px;
+  margin: 10% auto;
 }
 
 .login-box h2 {
@@ -77,6 +81,7 @@ body {
   border: none; border-radius: 6px;
   cursor: pointer; font-weight: bold;
   transition: background 0.3s;
+  width: 90%; margin-top: 10px;
 }
 
 .login-box button:hover { background: #3f7e24; }
