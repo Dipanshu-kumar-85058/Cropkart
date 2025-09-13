@@ -1,80 +1,38 @@
 [
   {
-    "name": "Wheat",
-    "price": "₹25/kg",
-    "farmer": "Ravi Sharma",
-    "img": "https://ibb.co/d4tDRcf0"
+    "id": 1,
+    "name": "Fresh Potatoes",
+    "type": "Vegetable",
+    "price": 20,
+    "unit": "kg",
+    "location": "Nashik, Maharashtra",
+    "image": "https://images.unsplash.com/photo-1518977676601-b53f82aba655?q=80&w=2070"
   },
   {
-    "name": "Rice",
-    "price": "₹40/kg",
-    "farmer": "Sunita Devi",
-    "img": "https://ibb.co/svX5py4m"
+    "id": 2,
+    "name": "Organic Tomatoes",
+    "type": "Vegetable",
+    "price": 45,
+    "unit": "kg",
+    "location": "Mandi, HP",
+    "image": "https://images.unsplash.com/photo-1560781297-579c250e823b?q=80&w=1974"
   },
   {
-    "name": "Sugarcane",
-    "price": "₹5/stick",
-    "farmer": "Karan Patel",
-    "img": "https://ibb.co/Y48T8bbV"
+    "id": 3,
+    "name": "Golden Wheat",
+    "type": "Grain",
+    "price": 2200,
+    "unit": "quintal",
+    "location": "Ludhiana, Punjab",
+    "image": "https://images.unsplash.com/photo-1598164016422-75d8624237d1?q=80&w=2070"
   },
   {
-    "name": "Tomatoes",
-    "price": "₹20/kg",
-    "farmer": "Ram Singh",
-    "img": "https://ibb.co/bYn20C2"
-  },
-  {
-    "name": "Onions",
-    "price": "₹15/kg",
-    "farmer": "Sita Devi",
-    "img": "https://ibb.co/svZbftTd"
-  },
-  {
-    "name": "Mangoes",
-    "price": "₹50/kg",
-    "farmer": "Mohan Kumar",
-    "img": "https://ibb.co/XfCLjmXx"
-  },
-  {
-    "name": "Spinach",
-    "price": "₹10/bunch",
-    "farmer": "Anil Yadav",
-    "img": "https://ibb.co/679Fsp38"
-  },
-  {
-    "name": "Chana Dal",
-    "price": "₹70/kg",
-    "farmer": "Neha Kumari",
-    "img": "https://ibb.co/spdHkmph"
-  },
-  {
-    "name": "Masoor Dal",
-    "price": "₹80/kg",
-    "farmer": "Vikram Joshi",
-    "img": "https://ibb.co/d4L7YKxK"
-  },
-  {
-    "name": "Moong Dal",
-    "price": "₹90/kg",
-    "farmer": "Meena Devi",
-    "img": "https://ibb.co/yKV14Xr"
-  },
-  {
-    "name": "Potatoes",
-    "price": "₹18/kg",
-    "farmer": "Geeta Bai",
-    "img": "https://ibb.co/yKV14Xr"
-  },
-  {
-    "name": "Corn",
-    "price": "₹30/kg",
-    "farmer": "Rajesh Verma",
-    "img": "hhttps://ibb.co/WmwHrNV"
-  },
-  {
-    "name": "Lemons",
-    "price": "₹120/kg",
-    "farmer": "Deepa Kumari",
-    "img": "https://ibb.co/vxDy7fC0"
+    "id": 4,
+    "name": "Alphonso Mangoes",
+    "type": "Fruit",
+    "price": 1200,
+    "unit": "dozen",
+    "location": "Ratnagiri, Maharashtra",
+    "image": "https://images.unsplash.com/photo-1627308594190-a057cd4bfac8?q=80&w=1974"
   }
 ]
