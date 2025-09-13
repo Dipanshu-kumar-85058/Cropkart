@@ -21,23 +21,42 @@
     </header>
 
     <div id="app">
+
         <div id="homePage" class="page active">
             <section class="hero text-center">
                 <h1 class="main-heading" data-lang-key="heroTitle">Fresh from Farm to Your Table</h1>
                 <p class="sub-heading" data-lang-key="heroSubtitle">Connect directly with farmers. Buy fresh produce.</p>
             </section>
         </div>
+
         <div id="browsePage" class="page">
             <div class="container browse-layout">
                 <main class="results-panel">
                     <h2 id="resultsTitle" data-lang-key="availableCrops">Available Crops</h2>
-                    <div class="crop-grid" id="cropGrid"></div>
+                    <div class="crop-grid" id="cropGrid">
+                        </div>
                 </main>
             </div>
         </div>
+
         <div id="loginPage" class="page">
             <div class="login-container">
-                <h2 class="main-heading text-center" data-lang-key="welcomeBack">Welcome back</h2>
+                <div class="text-center">
+                    <h2 class="main-heading" style="font-size: 2rem;" data-lang-key="welcomeBack">Welcome back</h2>
+                    <p class="sub-heading">Sign in to your account</p>
+                </div>
+                <form id="loginForm">
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" required>
+                    </div>
+                    <div id="loginError" class="error-message"></div>
+                    <button type="submit" class="btn-submit" data-lang-key="signIn">Sign In</button>
+                </form>
             </div>
         </div>
     </div>
@@ -47,13 +66,28 @@
             <span class="close-button" onclick="hideModal('listCropModal')">&times;</span>
             <h2 data-lang-key="listNewCrop">List a New Crop</h2>
             <form id="listCropForm">
-                <div class="form-group"><label for="cropName" data-lang-key="cropNameLabel">Crop Name</label><input type="text" id="cropName" required></div>
-                <div class="form-group"><label for="location" data-lang-key="locationLabel">Location</label><input type="text" id="location" required></div>
-                <div class="form-group form-inline">
-                    <div><label for="price" data-lang-key="priceLabel">Price (₹)</label><input type="number" id="price" required></div>
-                    <div><label for="unit" data-lang-key="unitLabel">Per</label><input type="text" id="unit" placeholder="e.g., kg, quintal, dozen" required></div>
+                <div class="form-group">
+                    <label for="cropName" data-lang-key="cropNameLabel">Crop Name</label>
+                    <input type="text" id="cropName" required>
                 </div>
-                <div class="form-group"><label for="cropImage" data-lang-key="photoLabel">Photo of Crop</label><input type="file" id="cropImage" accept="image/*"></div>
+                <div class="form-group">
+                    <label for="location" data-lang-key="locationLabel">Location</label>
+                    <input type="text" id="location" required>
+                </div>
+                <div class="form-group form-inline">
+                    <div>
+                        <label for="price" data-lang-key="priceLabel">Price (₹)</label>
+                        <input type="number" id="price" required>
+                    </div>
+                    <div>
+                        <label for="unit" data-lang-key="unitLabel">Per</label>
+                        <input type="text" id="unit" placeholder="e.g., kg, quintal, dozen" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="cropImage" data-lang-key="photoLabel">Photo of Crop</label>
+                    <input type="file" id="cropImage" accept="image/*">
+                </div>
                 <button type="submit" class="btn-submit" data-lang-key="submitListing">Submit Listing</button>
             </form>
         </div>
