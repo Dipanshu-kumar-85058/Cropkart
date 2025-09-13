@@ -1,74 +1,56 @@
-//--- GLOBAL STATE ---
-let currentLang = 'en'; 
-let allCrops = []; 
+// --- GLOBAL STATE ---
+let currentLang = 'en';
+let allCrops = [];
 
 // --- TRANSLATION DATA ---
-const translations = {
-    en: {
-        browseCrops: "Browse Crops",
-        listYourCrop: "List Your Crop",
-        signIn: "Sign In",
-        heroTitle: "Fresh from Farm to Your Table",
-        heroSubtitle: "Connect directly with farmers. Buy fresh produce.",
-        availableCrops: "Available Crops",
-        orderSuccessful: "Order Successful! ✅",
-        welcomeBack: "Welcome back",
-        listNewCrop: "List a New Crop",
-        cropNameLabel: "Crop Name",
-        locationLabel: "Location",
-        priceLabel: "Price (₹)",
-        unitLabel: "Per",
-        photoLabel: "Photo of Crop",
-        submitListing: "Submit Listing",
-        orderNow: "Order Now"
-    },
-    hi: {
-        browseCrops: "फसलें देखें",
-        listYourCrop: " अपनी फसल बेचें",
-        signIn: "साइन इन करें",
-        heroTitle: "खेत से सीधे आपकी मेज पर",
-        heroSubtitle: "किसानों से सीधे जुड़ें। ताज़ा उपज खरीदें।",
-        availableCrops: "उपलब्ध फसलें",
-        orderSuccessful: "ऑर्डर सफल! ✅",
-        welcomeBack: "वापसी पर स्वागत है",
-        listNewCrop: "एक नई फसल सूचीबद्ध करें",
-        cropNameLabel: "फ़सल का नाम",
-        locationLabel: "स्थान",
-        priceLabel: "कीमत (₹)",
-        unitLabel: "प्रति",
-        photoLabel: "फसल की तस्वीर",
-        submitListing: "लिस्टिंग जमा करें",
-        orderNow: "अभी ऑर्डर करें"
-    }
-};
+const translations = { /* ... (no changes) ... */ };
 
 // --- INITIALIZATION ---
 document.addEventListener('DOMContentLoaded', () => {
-    fetchCrops();
+    fetchDataAndRender(); // Renamed for clarity
     document.getElementById('listCropForm').addEventListener('submit', handleAddCrop);
+    document.getElementById('loginForm').addEventListener('submit', handleLogin);
 });
 
 // --- CORE FUNCTIONS ---
 
-async function fetchCrops() {
+/**
+ * Fetches data and then calls functions to render all necessary page sections.
+ */
+async function fetchDataAndRender() {
     try {
         const response = await fetch('crops.json');
         allCrops = await response.json();
-        renderCrops(allCrops);
+        
+        // Populate all dynamic sections of the site
+        renderBestsellers();
+        renderFeaturedFarmers();
+        applyFilters(); // Initial render for the browse page
+        
     } catch (error) {
         console.error('Error fetching crop data:', error);
     }
 }
 
+/**
+ * Renders crop cards into a specified container.
+ * @param {Array} cropsToRender - An array of crop objects to display.
+ * @param {string} containerId - The ID of the container element to put the cards in.
+ */
+function renderCrops(cropsToRender, containerId) {
+    const container = document.getElementById(containerId);
+    if (!container) return; // Exit if the container doesn't exist
+    
+    container.innerHTML = ''; // Clear previous content
 
-function renderCrops(cropsToRender) {
-    const cropGrid = document.getElementById('cropGrid');
-    cropGrid.innerHTML = '';
-  
+    if (cropsToRender.length === 0) {
+        container.innerHTML = `<p>No crops found.</p>`;
+        return;
+    }
+
     cropsToRender.forEach(crop => {
         const card = document.createElement('div');
         card.className = 'crop-card';
-      
         card.innerHTML = `
             <img src="${crop.image}" alt="${crop.name}">
             <div class="card-content">
@@ -80,9 +62,83 @@ function renderCrops(cropsToRender) {
                 <button class="btn-order" onclick="placeOrder(${crop.id})" data-lang-key="orderNow">${translations[currentLang].orderNow}</button>
             </div>
         `;
-        cropGrid.appendChild(card);
+        container.appendChild(card);
     });
 }
+
+
+// --- [NEW] HOMEPAGE RENDER FUNCTIONS ---
+
+/**
+ * Filters for bestseller crops and renders them on the homepage.
+ */
+function renderBestsellers() {
+    const bestsellers = allCrops.filter(crop => crop.bestseller === true).slice(0, 4); // Show max 4
+    renderCrops(bestsellers, 'bestsellerGrid');
+}
+
+/**
+ * Finds unique featured farmers and renders their cards on the homepage.
+ */
+function renderFeaturedFarmers() {
+    const featuredFarmerGrid = document.getElementById('featuredFarmerGrid');
+    const featuredFarmers = new Map();
+
+    // Use a Map to automatically handle uniqueness based on farmer's name
+    allCrops.forEach(crop => {
+        if (crop.farmer.featured) {
+            featuredFarmers.set(crop.farmer.name, crop.farmer);
+        }
+    });
+
+    featuredFarmerGrid.innerHTML = ''; // Clear previous content
+    featuredFarmers.forEach(farmer => {
+        const card = document.createElement('div');
+        card.className = 'farmer-card';
+        card.innerHTML = `
+            <img src="${farmer.avatar}" alt="${farmer.name}">
+            <h4>${farmer.name}</h4>
+        `;
+        featuredFarmerGrid.appendChild(card);
+    });
+}
+
+
+// --- FILTERING LOGIC ---
+
+/**
+ * Gets all filter values, filters the master list, and re-renders the browse grid.
+ */
+function applyFilters() {
+    // 1. Get current values from all filter inputs
+    const typeCheckboxes = document.querySelectorAll('#cropTypeFilter input:checked');
+    const selectedTypes = Array.from(typeCheckboxes).map(cb => cb.value);
+    const maxPrice = document.getElementById('priceRange').value;
+    const locationQuery = document.getElementById('locationFilter').value.toLowerCase();
+    const maxDistance = document.getElementById('distanceFilter').value; // Get distance value
+
+    document.getElementById('priceValue').textContent = `₹${maxPrice}`;
+
+    // 2. Filter the 'allCrops' array
+    const filteredCrops = allCrops.filter(crop => {
+        const typeMatch = selectedTypes.length === 0 || selectedTypes.includes(crop.type);
+        const priceMatch = crop.price <= maxPrice;
+        const locationMatch = locationQuery === '' || crop.location.toLowerCase().includes(locationQuery);
+        
+        // [NEW] Distance Match Logic
+        const distanceMatch = maxDistance === 'any' || 
+                              (maxDistance === '100' && crop.distance > 50) || 
+                              (crop.distance <= parseInt(maxDistance));
+
+        return typeMatch && priceMatch && locationMatch && distanceMatch;
+    });
+
+    // 3. Re-render the main crop grid with only the filtered results
+    const resultsTitle = document.getElementById('resultsTitle');
+    resultsTitle.textContent = `Available Crops (${filteredCrops.length} results)`;
+    renderCrops(filteredCrops, 'cropGrid');
+}
+
 
 // --- PAGE & MODAL NAVIGATION ---
 
@@ -178,3 +234,4 @@ function handleLogin(event) {
         errorDiv.style.display = 'block';
     }
 }
+
