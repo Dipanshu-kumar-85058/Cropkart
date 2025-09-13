@@ -1,203 +1,70 @@
-/* Reset + Global */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "Segoe UI", Arial, sans-serif;
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500;600&family=Roboto:wght@400;700&display=swap');
+
+:root {
+    --primary-green: #4CAF50;
+    --secondary-orange: #FF9800;
+    --trust-blue: #2196F3;
+    --background-white: #F8F9FA;
+    --text-dark-green: #2E7D32;
+    --border-color: #ddd;
+    --font-heading: 'Poppins', sans-serif;
+    --font-body: 'Roboto', sans-serif;
 }
 
-body {
-  background: #f7fff2;
-  color: #333;
-  text-align: center;
+/* --- General Styles --- */
+body { margin: 0; font-family: var(--font-body); background-color: var(--background-white); color: var(--text-dark-green); }
+.page { display: none; }
+.page.active { display: block; }
+.container { padding: 2rem 5%; }
+.text-center { text-align: center; }
+.main-heading { font-family: var(--font-heading); font-size: 3rem; margin-bottom: 1rem; }
+.sub-heading { font-size: 1.2rem; color: #555; margin-bottom: 2rem; }
+
+/* --- Header & Navigation --- */
+.navbar { display: flex; justify-content: space-between; align-items: center; padding: 1rem 5%; background-color: white; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+.navbar .logo { font-family: var(--font-heading); font-size: 1.8rem; color: var(--primary-green); text-decoration: none; }
+.nav-links a { margin: 0 1rem; text-decoration: none; color: var(--text-dark-green); font-weight: 500; cursor: pointer; }
+.nav-buttons a, .nav-buttons button { padding: 0.6rem 1.2rem; border-radius: 5px; cursor: pointer; font-weight: 500; font-size: 0.9rem; text-decoration: none; margin-left: 0.5rem; border: 1px solid var(--primary-green); }
+#lang-switcher { background: transparent; color: var(--primary-green); }
+.btn-list-crop { background-color: var(--secondary-orange); color: white; border-color: var(--secondary-orange); }
+.btn-signin { background-color: transparent; color: var(--primary-green); }
+
+/* --- Hero Section --- */
+.hero { padding: 4rem 2rem; }
+
+/* --- Browse Page & Crop Cards --- */
+.browse-layout { max-width: 1200px; margin: 0 auto; }
+.crop-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; }
+.crop-card { background-color: white; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); overflow: hidden; display: flex; flex-direction: column; }
+.crop-card img { width: 100%; height: 200px; object-fit: cover; }
+.card-content { padding: 1rem; flex-grow: 1; }
+.card-content h4 { font-family: var(--font-heading); margin: 0.5rem 0; }
+.card-content .price { font-size: 1.2rem; font-weight: bold; color: var(--primary-green); }
+.card-content .location { color: #666; font-size: 0.9em; margin-bottom: 1rem; }
+.card-actions { padding: 0 1rem 1rem; }
+.btn-order { width: 100%; padding: 0.8rem; border: none; border-radius: 5px; font-size: 1rem; cursor: pointer; background-color: var(--trust-blue); color: white; }
+
+/* --- Modal for "List a Crop" --- */
+.modal-overlay { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); }
+.modal-content { background-color: #fefefe; margin: 10% auto; padding: 2rem; border-radius: 8px; width: 90%; max-width: 500px; position: relative; }
+.close-button { color: #aaa; float: right; font-size: 28px; font-weight: bold; cursor: pointer; }
+.form-group { margin-bottom: 1.5rem; }
+.form-group label { display: block; margin-bottom: 0.5rem; font-weight: bold; }
+.form-group input { width: 100%; padding: 0.8rem; font-size: 1rem; border: 1px solid var(--border-color); border-radius: 5px; box-sizing: border-box; }
+.form-inline { display: flex; gap: 1rem; }
+.form-inline > div { flex: 1; }
+.btn-submit { width: 100%; padding: 0.9rem; font-size: 1.1rem; border: none; border-radius: 5px; background-color: var(--primary-green); color: white; cursor: pointer; }
+
+/* --- Styles for Order Success Modal --- */
+#orderDetails {
+    margin-top: 1.5rem;
+    padding: 1rem;
+    background-color: #f0fff0; /* Light green background */
+    border-left: 5px solid var(--primary-green);
+    text-align: left;
+    line-height: 1.6;
+    color: var(--text-dark-green);
 }
-
-/* Hidden utility */
-.hidden { display: none !important; }
-
-/* Full-page overlays for different screens */
-#splash, #roleSelect, #farmerForm, #consumerForm, #marketplace {
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  overflow-y: auto;
-  background: #f1f8e9;
-  z-index: 10;
-}
-
-/* Splash Screen */
-#splash {
-  background: linear-gradient(135deg, #a8e063, #56ab2f);
-  display: flex; justify-content: center; align-items: center;
-  color: white; z-index: 100;
-}
-
-.splash-content h1 {
-  font-size: 2.8em;
-  font-weight: bold;
-  margin-bottom: 10px;
-}
-
-.splash-content p {
-  font-size: 1.2em;
-  opacity: 0.9;
-}
-
-.loader {
-  margin: 20px auto;
-  width: 50px; height: 50px;
-  border: 6px solid rgba(255,255,255,0.3);
-  border-top: 6px solid white;
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
-}
-
-@keyframes spin { 100% { transform: rotate(360deg); } }
-
-/* Login/Form Box */
-.login-box {
-  background: white;
-  padding: 30px;
-  border-radius: 12px;
-  box-shadow: 0 6px 12px rgba(0,0,0,0.2);
-  width: 320px;
-  margin: 10% auto;
-}
-
-.login-box h2 {
-  margin-bottom: 15px;
-  color: #2e7d32;
-}
-
-.login-box input {
-  width: 90%; padding: 10px; margin: 10px 0;
-  border-radius: 6px; border: 1px solid #ccc;
-  font-size: 14px;
-}
-
-.login-box button {
-  padding: 10px 20px;
-  background: #56ab2f; color: white;
-  border: none; border-radius: 6px;
-  cursor: pointer; font-weight: bold;
-  transition: background 0.3s;
-  width: 90%; margin-top: 10px;
-}
-
-.login-box button:hover { background: #3f7e24; }
-
-/* Marketplace Header */
-header {
-  background: #56ab2f;
-  color: white;
-  padding: 15px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-}
-
-header h1 {
-  flex: 1 1 100%;
-  font-size: 1.8em;
-  margin-bottom: 10px;
-}
-
-.toolbar {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
-.toolbar input, .toolbar select, .toolbar button {
-  padding: 8px 12px;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-  font-size: 14px;
-}
-
-.toolbar input { flex: 1; min-width: 180px; }
-.toolbar select { min-width: 140px; }
-.toolbar button {
-  background: #2e7d32; color: white;
-  border: none; cursor: pointer;
-  font-weight: bold;
-}
-.toolbar button:hover { background: #1b5e20; }
-
-/* Post Crop Form */
-.form-box {
-  margin: 20px auto;
-  padding: 20px;
-  background: #fff;
-  border-radius: 12px;
-  width: 90%;
-  max-width: 400px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-}
-
-.form-box h2 { margin-bottom: 15px; color: #2e7d32; }
-
-.form-box input {
-  width: 90%; padding: 10px; margin: 8px 0;
-  border-radius: 6px; border: 1px solid #ccc;
-}
-
-.form-box button {
-  margin-top: 10px;
-  padding: 10px 20px;
-  background: #56ab2f; color: white;
-  border: none; border-radius: 6px;
-  cursor: pointer;
-  font-weight: bold;
-}
-.form-box button:hover { background: #3f7e24; }
-
-/* Crop Listings */
-#listings {
-  margin: 20px;
-  display: grid;
-  gap: 15px;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-}
-
-.card {
-  background: white;
-  padding: 15px;
-  border-radius: 12px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
-  transition: transform 0.2s, box-shadow 0.2s;
-}
-
-.card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
-}
-
-.card img {
-  width: 100%; height: 150px;
-  object-fit: cover;
-  border-radius: 10px;
-  margin-bottom: 10px;
-}
-
-.card h3 {
-  color: #2e7d32;
-  margin-bottom: 6px;
-}
-
-.card button {
-  margin-top: 8px; padding: 8px 14px;
-  background: #56ab2f; color: white;
-  border: none; border-radius: 6px;
-  cursor: pointer; font-size: 14px;
-  transition: background 0.3s;
-}
-.card button:hover { background: #3f7e24; }
-
-/* Responsive */
-@media (max-width: 600px) {
-  header h1 { font-size: 1.4em; }
-  .toolbar { flex-direction: column; }
+#orderDetails strong {
+    color: #333;
 }
