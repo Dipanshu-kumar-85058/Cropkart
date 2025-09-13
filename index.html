@@ -7,49 +7,65 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <!-- Splash Screen -->
+  
   <div id="splash">
     <div class="splash-content">
-      <h1>🌱 CropKart</h1>
-      <p>Empowering Farmers, Connecting Communities</p>
+      <h1 data-i18n="splashTitle">🌱 CropKart</h1>
+      <p data-i18n="splashTagline">Empowering Farmers, Connecting Communities</p>
       <div class="loader"></div>
     </div>
   </div>
 
-  <!-- Login Screen -->
-  <div id="login" class="hidden">
+  <div id="roleSelect" class="hidden">
     <div class="login-box">
-      <h2>Login to CropKart</h2>
-      <input type="email" id="email" placeholder="Enter Gmail ID" />
-      <input type="password" id="password" placeholder="Enter Password" />
-      <button onclick="login()">Login</button>
+      <h2 data-i18n="welcomeMsg">Welcome to CropKart</h2>
+      <p data-i18n="selectRole">Select your role:</p>
+      <button onclick="showRoleForm('farmer')" data-i18n="farmerBtn">👨‍🌾 Farmer</button>
+      <button onclick="showRoleForm('consumer')" data-i18n="consumerBtn">🛒 Consumer</button>
     </div>
   </div>
 
-  <!-- Marketplace -->
+  <div id="farmerForm" class="hidden">
+    <div class="login-box">
+      <h2 data-i18n="farmerLoginTitle">Farmer Login</h2>
+      <input type="text" id="farmerName" data-i18n-placeholder="fullNamePlaceholder" />
+      <input type="email" id="farmerEmail" data-i18n-placeholder="emailPlaceholder" />
+      <input type="password" id="farmerPass" data-i18n-placeholder="passwordPlaceholder" />
+      <button onclick="loginUser('farmer')" data-i18n="loginBtn">Login</button>
+    </div>
+  </div>
+
+  <div id="consumerForm" class="hidden">
+    <div class="login-box">
+      <h2 data-i18n="consumerLoginTitle">Consumer Login</h2>
+      <input type="email" id="consumerEmail" data-i18n-placeholder="emailPlaceholder" />
+      <input type="password" id="consumerPass" data-i18n-placeholder="passwordPlaceholder" />
+      <button onclick="loginUser('consumer')" data-i18n="loginBtn">Login</button>
+    </div>
+  </div>
+
   <div id="marketplace" class="hidden">
     <header>
-      <h1>🌾 CropKart Marketplace</h1>
+      <h1 data-i18n="marketplaceTitle">🌾 CropKart Marketplace</h1>
       <div class="toolbar">
-        <input type="text" id="searchBar" placeholder="Search crops..." onkeyup="filterCrops()" />
+        <input type="text" id="searchBar" data-i18n-placeholder="searchPlaceholder" onkeyup="filterCrops()" />
         <select id="sortSelect" onchange="sortCrops()">
-          <option value="default">Sort By</option>
-          <option value="priceLow">Price: Low → High</option>
-          <option value="priceHigh">Price: High → Low</option>
-          <option value="name">Name A-Z</option>
+          <option value="default" data-i18n="sortBy">Sort By</option>
+          <option value="priceLow" data-i18n="priceLowHigh">Price: Low → High</option>
+          <option value="priceHigh" data-i18n="priceHighLow">Price: High → Low</option>
+          <option value="name" data-i18n="nameAZ">Name A-Z</option>
         </select>
-        <button onclick="toggleForm()">+ Post Crop</button>
+        <button id="langToggleBtn" onclick="toggleLanguage()">हिन्दी</button>
+        <button id="listCropBtn" class="hidden" onclick="toggleForm()" data-i18n="postCropBtn">+ Post Crop</button>
       </div>
     </header>
 
-    <!-- Post Crop Form -->
     <div id="postForm" class="hidden form-box">
-      <h2>Post a New Crop</h2>
-      <input type="text" id="cropName" placeholder="Crop Name" />
-      <input type="text" id="cropPrice" placeholder="Price (e.g. ₹30/kg)" />
-      <input type="text" id="farmerName" placeholder="Farmer Name" />
-      <input type="text" id="cropImg" placeholder="Image URL" />
-      <button onclick="addCrop()">Submit</button>
+      <h2 data-i18n="postCropFormTitle">Post a New Crop</h2>
+      <input type="text" id="newCropName" data-i18n-placeholder="cropNamePlaceholder" />
+      <input type="text" id="newCropPrice" data-i18n-placeholder="pricePlaceholder" />
+      <input type="text" id="newCropImg" data-i18n-placeholder="imageURLPlaceholder" />
+      <button onclick="addCrop()" data-i18n="submitBtn">Submit</button>
     </div>
 
     <main>
