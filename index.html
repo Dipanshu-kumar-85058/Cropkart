@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CropKart</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- Splash Screen -->
+  <div id="splash">
+    <div class="splash-content">
+      <h1>🌱 CropKart</h1>
+      <p>Empowering Farmers, Connecting Communities</p>
+      <div class="loader"></div>
+    </div>
+  </div>
+
+  <!-- Login Screen -->
+  <div id="login" class="hidden">
+    <div class="login-box">
+      <h2>Login to CropKart</h2>
+      <input type="email" id="email" placeholder="Enter Gmail ID" />
+      <input type="password" id="password" placeholder="Enter Password" />
+      <button onclick="login()">Login</button>
+    </div>
+  </div>
+
+  <!-- Marketplace -->
+  <div id="marketplace" class="hidden">
+    <header>
+      <h1>🌾 CropKart Marketplace</h1>
+      <div class="toolbar">
+        <input type="text" id="searchBar" placeholder="Search crops..." onkeyup="filterCrops()" />
+        <select id="sortSelect" onchange="sortCrops()">
+          <option value="default">Sort By</option>
+          <option value="priceLow">Price: Low → High</option>
+          <option value="priceHigh">Price: High → Low</option>
+          <option value="name">Name A-Z</option>
+        </select>
+        <button onclick="toggleForm()">+ Post Crop</button>
+      </div>
+    </header>
+
+    <!-- Post Crop Form -->
+    <div id="postForm" class="hidden form-box">
+      <h2>Post a New Crop</h2>
+      <input type="text" id="cropName" placeholder="Crop Name" />
+      <input type="text" id="cropPrice" placeholder="Price (e.g. ₹30/kg)" />
+      <input type="text" id="farmerName" placeholder="Farmer Name" />
+      <input type="text" id="cropImg" placeholder="Image URL" />
+      <button onclick="addCrop()">Submit</button>
+    </div>
+
+    <main>
+      <section id="listings"></section>
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,80 @@
+[
+  {
+    "name": "Wheat",
+    "price": "₹25/kg",
+    "farmer": "Ravi Sharma",
+    "img": "https://i.ibb.co/2K5yCpV/wheat.jpg"
+  },
+  {
+    "name": "Rice",
+    "price": "₹40/kg",
+    "farmer": "Sunita Devi",
+    "img": "https://i.ibb.co/8Mg3cFf/rice.jpg"
+  },
+  {
+    "name": "Sugarcane",
+    "price": "₹5/stick",
+    "farmer": "Karan Patel",
+    "img": "https://i.ibb.co/RQNxx8q/sugarcane.jpg"
+  },
+  {
+    "name": "Tomatoes",
+    "price": "₹20/kg",
+    "farmer": "Ram Singh",
+    "img": "https://i.ibb.co/JrFh2mX/tomatoes.jpg"
+  },
+  {
+    "name": "Onions",
+    "price": "₹15/kg",
+    "farmer": "Sita Devi",
+    "img": "https://i.ibb.co/D7VDDjQ/onions.jpg"
+  },
+  {
+    "name": "Mangoes",
+    "price": "₹50/kg",
+    "farmer": "Mohan Kumar",
+    "img": "https://i.ibb.co/jz1RbrX/mango.jpg"
+  },
+  {
+    "name": "Spinach",
+    "price": "₹10/bunch",
+    "farmer": "Anil Yadav",
+    "img": "https://i.ibb.co/6Wnsr8w/spinach.jpg"
+  },
+  {
+    "name": "Chana Dal",
+    "price": "₹70/kg",
+    "farmer": "Neha Kumari",
+    "img": "https://i.ibb.co/vJXyqXK/chana.jpg"
+  },
+  {
+    "name": "Masoor Dal",
+    "price": "₹80/kg",
+    "farmer": "Vikram Joshi",
+    "img": "https://i.ibb.co/RcYfxmf/masoor.jpg"
+  },
+  {
+    "name": "Moong Dal",
+    "price": "₹90/kg",
+    "farmer": "Meena Devi",
+    "img": "https://i.ibb.co/qWMQf5k/moong.jpg"
+  },
+  {
+    "name": "Potatoes",
+    "price": "₹18/kg",
+    "farmer": "Geeta Bai",
+    "img": "https://i.ibb.co/HD9VJbJ/potatoes.jpg"
+  },
+  {
+    "name": "Corn",
+    "price": "₹30/kg",
+    "farmer": "Rajesh Verma",
+    "img": "https://i.ibb.co/tHVn8Zc/corn.jpg"
+  },
+  {
+    "name": "Lemons",
+    "price": "₹120/kg",
+    "farmer": "Deepa Kumari",
+    "img": "https://i.ibb.co/L53q9Q4/lemon.jpg"
+  }
+]
