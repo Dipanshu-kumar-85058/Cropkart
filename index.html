@@ -27,15 +27,84 @@
                 <h1 class="main-heading" data-lang-key="heroTitle">Fresh from Farm to Your Table</h1>
                 <p class="sub-heading" data-lang-key="heroSubtitle">Connect directly with farmers. Buy fresh produce.</p>
             </section>
+
+            <section class="container text-center">
+                <h2 class="section-title">How It Works</h2>
+                <div class="how-it-works-grid">
+                    <div class="step-card">
+                        <h3>1. Search & Filter</h3>
+                        <p>Find the exact produce you need from local farms near you.</p>
+                    </div>
+                    <div class="step-card">
+                        <h3>2. Connect Directly</h3>
+                        <p>Contact farmers directly to ask questions and arrange purchases.</p>
+                    </div>
+                    <div class="step-card">
+                        <h3>3. Fresh Delivery</h3>
+                        <p>Get the freshest produce straight from the farm to your table.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="container">
+                <h2 class="section-title text-center">Our Best Sellers</h2>
+                <div class="crop-grid" id="bestsellerGrid">
+                    </div>
+            </section>
+
+            <section class="container">
+                <h2 class="section-title text-center">Featured Farmers</h2>
+                <div class="farmer-grid" id="featuredFarmerGrid">
+                    </div>
+            </section>
         </div>
 
         <div id="browsePage" class="page">
-            <div class="container browse-layout">
-                <main class="results-panel">
-                    <h2 id="resultsTitle" data-lang-key="availableCrops">Available Crops</h2>
-                    <div class="crop-grid" id="cropGrid">
+            <div class="container">
+                <div class="browse-layout">
+                    <aside class="filter-panel">
+                        <h3>Filter Results</h3>
+                        
+                        <div class="filter-group">
+                            <h4>Crop Type</h4>
+                            <div id="cropTypeFilter">
+                                <label><input type="checkbox" value="Vegetable" onchange="applyFilters()"> Vegetables</label>
+                                <label><input type="checkbox" value="Fruit" onchange="applyFilters()"> Fruits</label>
+                                <label><input type="checkbox" value="Grain" onchange="applyFilters()"> Grains</label>
+                            </div>
                         </div>
-                </main>
+
+                        <div class="filter-group">
+                            <h4>Max Price (₹)</h4>
+                            <div class="price-slider-group">
+                                <input type="range" id="priceRange" min="10" max="2500" value="2500" oninput="applyFilters()">
+                                <p>Up to: <strong id="priceValue">₹2500</strong></p>
+                            </div>
+                        </div>
+
+                         <div class="filter-group">
+                            <h4>Location</h4>
+                            <input type="text" id="locationFilter" class="filter-input" placeholder="e.g., Nashik, Punjab" oninput="applyFilters()">
+                        </div>
+
+                        <div class="filter-group">
+                            <h4>Distance</h4>
+                            <select id="distanceFilter" class="filter-input" onchange="applyFilters()">
+                                <option value="any">Any Distance</option>
+                                <option value="15">Under 15 km</option>
+                                <option value="30">Under 30 km</option>
+                                <option value="50">Under 50 km</option>
+                                <option value="100">Over 50 km</option>
+                            </select>
+                        </div>
+                    </aside>
+
+                    <main class="results-panel">
+                        <h2 id="resultsTitle">Available Crops</h2>
+                        <div class="crop-grid" id="cropGrid">
+                            </div>
+                    </main>
+                </div>
             </div>
         </div>
 
@@ -66,28 +135,13 @@
             <span class="close-button" onclick="hideModal('listCropModal')">&times;</span>
             <h2 data-lang-key="listNewCrop">List a New Crop</h2>
             <form id="listCropForm">
-                <div class="form-group">
-                    <label for="cropName" data-lang-key="cropNameLabel">Crop Name</label>
-                    <input type="text" id="cropName" required>
-                </div>
-                <div class="form-group">
-                    <label for="location" data-lang-key="locationLabel">Location</label>
-                    <input type="text" id="location" required>
-                </div>
+                <div class="form-group"><label for="cropName" data-lang-key="cropNameLabel">Crop Name</label><input type="text" id="cropName" required></div>
+                <div class="form-group"><label for="location" data-lang-key="locationLabel">Location</label><input type="text" id="location" required></div>
                 <div class="form-group form-inline">
-                    <div>
-                        <label for="price" data-lang-key="priceLabel">Price (₹)</label>
-                        <input type="number" id="price" required>
-                    </div>
-                    <div>
-                        <label for="unit" data-lang-key="unitLabel">Per</label>
-                        <input type="text" id="unit" placeholder="e.g., kg, quintal, dozen" required>
-                    </div>
+                    <div><label for="price" data-lang-key="priceLabel">Price (₹)</label><input type="number" id="price" required></div>
+                    <div><label for="unit" data-lang-key="unitLabel">Per</label><input type="text" id="unit" placeholder="e.g., kg, quintal, dozen" required></div>
                 </div>
-                <div class="form-group">
-                    <label for="cropImage" data-lang-key="photoLabel">Photo of Crop</label>
-                    <input type="file" id="cropImage" accept="image/*">
-                </div>
+                <div class="form-group"><label for="cropImage" data-lang-key="photoLabel">Photo of Crop</label><input type="file" id="cropImage" accept="image/*"></div>
                 <button type="submit" class="btn-submit" data-lang-key="submitListing">Submit Listing</button>
             </form>
         </div>
