@@ -1,269 +1,155 @@
-// Global variables
-let crops = [];
-let userRole = null;
-let userName = null;
-let currentLang = 'en';
+//--- GLOBAL STATE ---
+let currentLang = 'en'; 
+let allCrops = []; 
 
-// Language Dictionary
-const strings = {
-  en: {
-    splashTitle: "🌱 CropKart",
-    splashTagline: "Empowering Farmers, Connecting Communities",
-    welcomeMsg: "Welcome to CropKart",
-    selectRole: "Select your role:",
-    farmerBtn: "👨‍🌾 Farmer",
-    consumerBtn: "🛒 Consumer",
-    farmerLoginTitle: "Farmer Login",
-    consumerLoginTitle: "Consumer Login",
-    fullNamePlaceholder: "Full Name",
-    emailPlaceholder: "Email",
-    passwordPlaceholder: "Password",
-    loginBtn: "Login",
-    marketplaceTitle: "🌾 CropKart Marketplace",
-    searchPlaceholder: "Search crops...",
-    sortBy: "Sort By",
-    priceLowHigh: "Price: Low → High",
-    priceHighLow: "Price: High → Low",
-    nameAZ: "Name A-Z",
-    postCropBtn: "+ Post Crop",
-    postCropFormTitle: "Post a New Crop",
-    cropNamePlaceholder: "Crop Name",
-    pricePlaceholder: "Price (e.g. ₹30/kg)",
-    imageURLPlaceholder: "Image URL",
-    submitBtn: "Submit",
-    noCropsFound: "No crops found.",
-    contactBtn: "Contact",
-    priceLabel: "Price:",
-    farmerLabel: "Farmer:",
-    fillAllFieldsAlert: "⚠️ Please fill all fields!",
-    welcomeAlert: (name) => `✅ Welcome, ${name}!`,
-    contactingAlert: (name) => `📞 Contacting ${name}...`,
-    cropAddedAlert: "✅ Crop added successfully!"
-  },
-  hi: {
-    splashTitle: "🌱 फसलकार्ट",
-    splashTagline: "किसानों को सशक्त बनाना, समुदायों को जोड़ना",
-    welcomeMsg: "फसलकार्ट में आपका स्वागत है",
-    selectRole: "अपनी भूमिका चुनें:",
-    farmerBtn: "👨‍🌾 किसान",
-    consumerBtn: "🛒 उपभोक्ता",
-    farmerLoginTitle: "किसान लॉगिन",
-    consumerLoginTitle: "उपभोक्ता लॉगिन",
-    fullNamePlaceholder: "पूरा नाम",
-    emailPlaceholder: "ईमेल",
-    passwordPlaceholder: "पासवर्ड",
-    loginBtn: "लॉगिन करें",
-    marketplaceTitle: "🌾 फसलकार्ट बाज़ार",
-    searchPlaceholder: "फसलों की खोज करें...",
-    sortBy: "क्रमबद्ध करें",
-    priceLowHigh: "मूल्य: कम → अधिक",
-    priceHighLow: "मूल्य: अधिक → कम",
-    nameAZ: "नाम A-Z",
-    postCropBtn: "+ फसल पोस्ट करें",
-    postCropFormTitle: "एक नई फसल पोस्ट करें",
-    cropNamePlaceholder: "फसल का नाम",
-    pricePlaceholder: "कीमत (उदाहरण: ₹30/किलो)",
-    imageURLPlaceholder: "छवि का यूआरएल",
-    submitBtn: "जमा करें",
-    noCropsFound: "कोई फसल नहीं मिली।",
-    contactBtn: "संपर्क करें",
-    priceLabel: "कीमत:",
-    farmerLabel: "किसान:",
-    fillAllFieldsAlert: "⚠️ कृपया सभी फ़ील्ड भरें!",
-    welcomeAlert: (name) => `✅ स्वागत है, ${name}!`,
-    contactingAlert: (name) => `📞 ${name} से संपर्क किया जा रहा है...`,
-    cropAddedAlert: "✅ फसल सफलतापूर्वक जोड़ दी गई है!"
-  }
+// --- TRANSLATION DATA ---
+const translations = {
+    en: {
+        browseCrops: "Browse Crops",
+        listYourCrop: "List Your Crop",
+        signIn: "Sign In",
+        heroTitle: "Fresh from Farm to Your Table",
+        heroSubtitle: "Connect directly with farmers. Buy fresh produce.",
+        availableCrops: "Available Crops",
+        orderSuccessful: "Order Successful! ✅",
+        welcomeBack: "Welcome back",
+        listNewCrop: "List a New Crop",
+        cropNameLabel: "Crop Name",
+        locationLabel: "Location",
+        priceLabel: "Price (₹)",
+        unitLabel: "Per",
+        photoLabel: "Photo of Crop",
+        submitListing: "Submit Listing",
+        orderNow: "Order Now"
+    },
+    hi: {
+        browseCrops: "फसलें देखें",
+        listYourCrop: " अपनी फसल बेचें",
+        signIn: "साइन इन करें",
+        heroTitle: "खेत से सीधे आपकी मेज पर",
+        heroSubtitle: "किसानों से सीधे जुड़ें। ताज़ा उपज खरीदें।",
+        availableCrops: "उपलब्ध फसलें",
+        orderSuccessful: "ऑर्डर सफल! ✅",
+        welcomeBack: "वापसी पर स्वागत है",
+        listNewCrop: "एक नई फसल सूचीबद्ध करें",
+        cropNameLabel: "फ़सल का नाम",
+        locationLabel: "स्थान",
+        priceLabel: "कीमत (₹)",
+        unitLabel: "प्रति",
+        photoLabel: "फसल की तस्वीर",
+        submitListing: "लिस्टिंग जमा करें",
+        orderNow: "अभी ऑर्डर करें"
+    }
 };
 
-// Function to update all text based on the current language
-function updateUI() {
-  const lang = strings[currentLang];
-  
-  // Update elements with data-i18n attributes
-  document.querySelectorAll('[data-i18n]').forEach(el => {
-    const key = el.getAttribute('data-i18n');
-    if (lang[key]) {
-      el.textContent = lang[key];
-    }
-  });
-
-  // Update placeholders with data-i18n-placeholder attributes
-  document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
-    const key = el.getAttribute('data-i18n-placeholder');
-    if (lang[key]) {
-      el.placeholder = lang[key];
-    }
-  });
-
-  // Update select options
-  document.getElementById('sortSelect').options[0].textContent = lang.sortBy;
-  document.getElementById('sortSelect').options[1].textContent = lang.priceLowHigh;
-  document.getElementById('sortSelect').options[2].textContent = lang.priceHighLow;
-  document.getElementById('sortSelect').options[3].textContent = lang.nameAZ;
-
-  // Re-render crops to update the text inside the cards
-  if (crops.length > 0) {
-    renderCrops(crops);
-  } else {
-    document.getElementById("listings").innerHTML = `<p>${lang.noCropsFound}</p>`;
-  }
-}
-
-// Function to toggle the language
-function toggleLanguage() {
-  currentLang = currentLang === 'en' ? 'hi' : 'en';
-  document.getElementById("langToggleBtn").textContent = currentLang === 'en' ? 'हिन्दी' : 'English';
-  updateUI();
-}
-
-// --- INITIAL APP LOAD & NAVIGATION ---
-window.addEventListener("load", () => {
-  setTimeout(() => {
-    document.getElementById("splash").classList.add("hidden");
-    document.getElementById("roleSelect").classList.remove("hidden");
-    updateUI(); // Initial UI update after splash screen
-  }, 2000);
+// --- INITIALIZATION ---
+document.addEventListener('DOMContentLoaded', () => {
+    fetchCrops();
+    document.getElementById('listCropForm').addEventListener('submit', handleAddCrop);
 });
 
-function showRoleForm(role) {
-  document.getElementById("roleSelect").classList.add("hidden");
-  if (role === 'farmer') {
-    document.getElementById("farmerForm").classList.remove("hidden");
-  } else if (role === 'consumer') {
-    document.getElementById("consumerForm").classList.remove("hidden");
-  }
-}
+// --- CORE FUNCTIONS ---
 
-function loginUser(role) {
-  userRole = role;
-  const lang = strings[currentLang];
-  
-  if (userRole === 'farmer') {
-    userName = document.getElementById("farmerName").value.trim();
-    if (!userName || !document.getElementById("farmerEmail").value.trim() || !document.getElementById("farmerPass").value.trim()) {
-      alert(lang.fillAllFieldsAlert);
-      return;
+async function fetchCrops() {
+    try {
+        const response = await fetch('crops.json');
+        allCrops = await response.json();
+        renderCrops(allCrops);
+    } catch (error) {
+        console.error('Error fetching crop data:', error);
     }
-    document.getElementById("farmerForm").classList.add("hidden");
-    document.getElementById("listCropBtn").classList.remove("hidden");
-  } else { // consumer
-    userName = document.getElementById("consumerEmail").value.trim();
-    if (!userName || !document.getElementById("consumerPass").value.trim()) {
-      alert(lang.fillAllFieldsAlert);
-      return;
-    }
-    document.getElementById("consumerForm").classList.add("hidden");
-  }
+}
+
+
+function renderCrops(cropsToRender) {
+    const cropGrid = document.getElementById('cropGrid');
+    cropGrid.innerHTML = '';
   
-  alert(lang.welcomeAlert(userName));
-  document.getElementById("marketplace").classList.remove("hidden");
-  loadCrops();
+    cropsToRender.forEach(crop => {
+        const card = document.createElement('div');
+        card.className = 'crop-card';
+      
+        card.innerHTML = `
+            <img src="${crop.image}" alt="${crop.name}">
+            <div class="card-content">
+                <h4>${crop.name}</h4>
+                <p class="price">₹${crop.price} / ${crop.unit}</p>
+                <p class="location">${crop.location}</p>
+            </div>
+            <div class="card-actions">
+                <button class="btn-order" onclick="placeOrder(${crop.id})" data-lang-key="orderNow">${translations[currentLang].orderNow}</button>
+            </div>
+        `;
+        cropGrid.appendChild(card);
+    });
 }
 
-// --- CORE FUNCTIONALITY ---
-async function loadCrops() {
-  try {
-    const response = await fetch("crops.json");
-    if (!response.ok) throw new Error("Network response was not ok");
-    crops = await response.json();
-    renderCrops(crops);
-  } catch (error) {
-    console.error("Error loading crops.json, using fallback data.", error);
-    crops = [
-      { name: "Tomatoes", price: "₹20/kg", farmer: "Ram Singh", img: "https://i.ibb.co/JrFh2mX/tomatoes.jpg" },
-      { name: "Wheat", price: "₹25/kg", farmer: "Ravi Sharma", img: "https://i.ibb.co/2K5yCpV/wheat.jpg" }
-    ];
-    renderCrops(crops);
-  }
+// --- PAGE & MODAL NAVIGATION ---
+
+function showPage(pageId) {
+    document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
+    document.getElementById(pageId).classList.add('active');
 }
 
-function renderCrops(list) {
-  const listingsEl = document.getElementById("listings");
-  listingsEl.innerHTML = "";
-  const lang = strings[currentLang];
+function showModal(modalId) { document.getElementById(modalId).style.display = 'flex'; }
+function hideModal(modalId) { document.getElementById(modalId).style.display = 'none'; }
 
-  if (list.length === 0) {
-    listingsEl.innerHTML = `<p>${lang.noCropsFound}</p>`;
-    return;
-  }
 
-  list.forEach(crop => {
-    const card = document.createElement("div");
-    card.className = "card";
-    card.innerHTML = `
-      <img src="${crop.img}" alt="${crop.name}">
-      <h3>${crop.name}</h3>
-      <p><strong>${lang.priceLabel}</strong> ${crop.price}</p>
-      <p><strong>${lang.farmerLabel}</strong> ${crop.farmer}</p>
-      <button onclick="contactFarmer('${crop.farmer}')">${lang.contactBtn}</button>
-    `;
-    listingsEl.appendChild(card);
-  });
+// --- FEATURE LOGIC ---
+
+function toggleLanguage() {
+    currentLang = currentLang === 'en' ? 'hi' : 'en';
+
+    document.querySelectorAll('[data-lang-key]').forEach(el => {
+        const key = el.getAttribute('data-lang-key');
+      
+        if (translations[currentLang][key]) {
+            el.innerText = translations[currentLang][key];
+        }
+    });
+    
+    document.getElementById('lang-switcher').innerText = currentLang === 'en' ? 'हिन्दी' : 'English';
+    renderCrops(allCrops);
 }
 
-function contactFarmer(name) {
-  alert(strings[currentLang].contactingAlert(name));
+function handleAddCrop(event) {
+    event.preventDefault();
+  
+    const newCrop = {
+        id: allCrops.length + 1, // Create a simple new ID.
+        name: document.getElementById('cropName').value,
+        location: document.getElementById('location').value,
+        price: document.getElementById('price').value,
+        unit: document.getElementById('unit').value,
+        image: 'https://images.unsplash.com/photo-1571771894824-c13b2412b375?q=80&w=2070'
+    };
+  
+    allCrops.unshift(newCrop); 
+  
+    renderCrops(allCrops);
+
+    hideModal('listCropModal');
+    document.getElementById('listCropForm').reset();
+    alert(`${newCrop.name} has been listed successfully for this session!`);
 }
 
-function filterCrops() {
-  const query = document.getElementById("searchBar").value.toLowerCase();
-  const filtered = crops.filter(crop => crop.name.toLowerCase().includes(query));
-  renderCrops(filtered);
+
+function placeOrder(cropId) {
+    const crop = allCrops.find(c => c.id === cropId);
+
+    if (crop) {
+        const orderDetailsContainer = document.getElementById('orderDetails');
+      
+        orderDetailsContainer.innerHTML = `
+            <p>Your order request has been sent to the farmer.</p>
+            <strong>Crop:</strong> ${crop.name}<br>
+            <strong>Price:</strong> ₹${crop.price} / ${crop.unit}<br>
+            <strong>Location:</strong> ${crop.location}
+        `;
+        
+        showModal('orderSuccessModal');
+    } else {
+        console.error('Could not find crop with ID:', cropId);
+        alert('An error occurred. Could not find crop details.');
+    }
 }
-
-function sortCrops() {
-  const value = document.getElementById("sortSelect").value;
-  let sorted = [...crops];
-
-  if (value === "priceLow") {
-    sorted.sort((a, b) => extractPrice(a.price) - extractPrice(b.price));
-  } else if (value === "priceHigh") {
-    sorted.sort((a, b) => extractPrice(b.price) - extractPrice(a.price));
-  } else if (value === "name") {
-    sorted.sort((a, b) => a.name.localeCompare(b.name));
-  }
-
-  renderCrops(sorted);
-}
-
-function extractPrice(priceStr) {
-  return parseInt(priceStr.replace(/[^\d]/g, "")) || 0;
-}
-
-// --- POST CROP FORM ---
-function toggleForm() {
-  document.getElementById("postForm").classList.toggle("hidden");
-}
-
-function addCrop() {
-  const lang = strings[currentLang];
-  const name = document.getElementById("newCropName").value.trim();
-  const price = document.getElementById("newCropPrice").value.trim();
-  const img = document.getElementById("newCropImg").value.trim() || "https://via.placeholder.com/150";
-
-  if (!name || !price) {
-    alert(lang.fillAllFieldsAlert);
-    return;
-  }
-
-  const newCrop = { name, price, farmer: userName, img };
-  crops.unshift(newCrop);
-  renderCrops(crops);
-
-  document.getElementById("newCropName").value = "";
-  document.getElementById("newCropPrice").value = "";
-  document.getElementById("newCropImg").value = "";
-  toggleForm();
-  alert(lang.cropAddedAlert);
-}
-
-// Expose functions to the global scope
-window.showRoleForm = showRoleForm;
-window.loginUser = loginUser;
-window.filterCrops = filterCrops;
-window.sortCrops = sortCrops;
-window.contactFarmer = contactFarmer;
-window.toggleForm = toggleForm;
-window.addCrop = addCrop;
-window.toggleLanguage = toggleLanguage;
