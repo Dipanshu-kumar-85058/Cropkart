@@ -57,8 +57,8 @@ body { margin: 0; font-family: var(--font-body); background-color: var(--backgro
 .filter-input { width: 100%; padding: 0.7rem; font-size: 1rem; border: 1px solid var(--border-color); border-radius: 5px; box-sizing: border-box; }
 
 /* --- Modals and Forms --- */
-.modal-overlay { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); }
-.modal-content { background-color: #fefefe; margin: 10% auto; padding: 2rem; border-radius: 8px; width: 90%; max-width: 500px; position: relative; }
+.modal-overlay { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 150%; background-color: rgba(0,0,0,0.5); }
+.modal-content { background-color: #fefefe; margin: 5% auto; padding: 2rem; border-radius: 8px; width: 90%; max-width: 500px; position: relative; }
 .close-button { color: #aaa; float: right; font-size: 28px; font-weight: bold; cursor: pointer; }
 .form-group { margin-bottom: 1.5rem; }
 .form-group label { display: block; margin-bottom: 0.5rem; font-weight: bold; }
@@ -115,3 +115,4 @@ body { margin: 0; font-family: var(--font-body); background-color: var(--backgro
         margin: 15% auto; /* Adjust vertical margin for pop-ups */
     }
 }
+
