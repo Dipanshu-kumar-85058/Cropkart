@@ -153,3 +153,28 @@ function placeOrder(cropId) {
         alert('An error occurred. Could not find crop details.');
     }
 }
+
+// --- [ADDED] NEW FUNCTION TO HANDLE LOGIN ---
+
+function handleLogin(event) {
+    event.preventDefault(); 
+    
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+    const errorDiv = document.getElementById('loginError');
+
+    // --- Simulated User Database ---
+    const correctEmail = "farmer@cropkart.com";
+    const correctPassword = "password123";
+
+    if (email === correctEmail && password === correctPassword) {
+        // If login is successful
+        alert("Login Successful! Welcome back.");
+        errorDiv.style.display = 'none';
+        showPage('browsePage');
+    } else {
+        // If login fails
+        errorDiv.textContent = "Invalid email or password. Please try again.";
+        errorDiv.style.display = 'block';
+    }
+}
