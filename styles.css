@@ -116,3 +116,69 @@ body { margin: 0; font-family: var(--font-body); background-color: var(--backgro
     }
 }
 
+/* --- [ADDED] Styles for New Homepage Sections --- */
+.section-title {
+    font-family: var(--font-heading);
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    color: var(--text-dark-green);
+}
+
+.how-it-works-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.step-card {
+    background-color: #ffffff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+.step-card h3 {
+    font-family: var(--font-heading);
+    color: var(--primary-green);
+}
+
+/* --- [ADDED] Styles for Featured Farmer Cards --- */
+.farmer-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+}
+
+.farmer-card {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    text-align: center;
+    padding: 1.5rem;
+    transition: transform 0.3s ease;
+}
+
+.farmer-card:hover {
+    transform: translateY(-5px);
+}
+
+.farmer-card img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%; /* Makes the image circular */
+    object-fit: cover;
+    border: 4px solid var(--primary-green);
+}
+
+.farmer-card h4 {
+    margin: 1rem 0 0;
+    font-family: var(--font-heading);
+}
+
+/* --- [ADDED] Responsive adjustments for new sections --- */
+@media (max-width: 768px) {
+    .section-title {
+        font-size: 2rem; /* Make section titles smaller on mobile */
+    }
+}
