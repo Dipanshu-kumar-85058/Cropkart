@@ -6,7 +6,14 @@
     "price": 20,
     "unit": "kg",
     "location": "Nashik, Maharashtra",
-    "image": "https://images.unsplash.com/photo-1518977676601-b53f82aba655?q=80&w=2070"
+    "image": "https://images.unsplash.com/photo-1518977676601-b53f82aba655?q=80&w=2070",
+    "bestseller": true,
+    "distance": 25,
+    "farmer": {
+      "name": "Anjali Patil",
+      "avatar": "https://images.unsplash.com/photo-1617056242132-51a82a7f4464?q=80&w=250",
+      "featured": true
+    }
   },
   {
     "id": 2,
@@ -15,7 +22,14 @@
     "price": 45,
     "unit": "kg",
     "location": "Mandi, HP",
-    "image": "https://images.unsplash.com/photo-1560781297-579c250e823b?q=80&w=1974"
+    "image": "https://images.unsplash.com/photo-1560781297-579c250e823b?q=80&w=1974",
+    "bestseller": false,
+    "distance": 85,
+    "farmer": {
+      "name": "Vikram Singh",
+      "avatar": "https://images.unsplash.com/photo-1620992389896-83a597371550?q=80&w=250",
+      "featured": false
+    }
   },
   {
     "id": 3,
@@ -24,7 +38,14 @@
     "price": 2200,
     "unit": "quintal",
     "location": "Ludhiana, Punjab",
-    "image": "https://images.unsplash.com/photo-1598164016422-75d8624237d1?q=80&w=2070"
+    "image": "https://images.unsplash.com/photo-1598164016422-75d8624237d1?q=80&w=2070",
+    "bestseller": true,
+    "distance": 45,
+    "farmer": {
+      "name": "Manjeet Kaur",
+      "avatar": "https://images.unsplash.com/photo-1619694218933-3b6c31a61a6c?q=80&w=250",
+      "featured": true
+    }
   },
   {
     "id": 4,
@@ -33,6 +54,141 @@
     "price": 1200,
     "unit": "dozen",
     "location": "Ratnagiri, Maharashtra",
-    "image": "https://images.unsplash.com/photo-1627308594190-a057cd4bfac8?q=80&w=1974"
+    "image": "https://images.unsplash.com/photo-1627308594190-a057cd4bfac8?q=80&w=1974",
+    "bestseller": true,
+    "distance": 12,
+    "farmer": {
+      "name": "Suresh Yadav",
+      "avatar": "https://images.unsplash.com/photo-1594939744113-1ab527c73259?q=80&w=250",
+      "featured": true
+    }
+  },
+  {
+    "id": 5,
+    "name": "Basmati Rice",
+    "type": "Grain",
+    "price": 120,
+    "unit": "kg",
+    "location": "Karnal, Haryana",
+    "image": "https://images.unsplash.com/photo-1586201375761-83865001e07c?q=80&w=2070",
+    "bestseller": false,
+    "distance": 60,
+    "farmer": {
+      "name": "Deepak Kumar",
+      "avatar": "https://images.unsplash.com/photo-1620992389896-83a597371550?q=80&w=250",
+      "featured": false
+    }
+  },
+  {
+    "id": 6,
+    "name": "Red Onions",
+    "type": "Vegetable",
+    "price": 28,
+    "unit": "kg",
+    "location": "Nashik, Maharashtra",
+    "image": "https://images.unsplash.com/photo-1580201091211-73874a72d73b?q=80&w=1974",
+    "bestseller": true,
+    "distance": 22,
+    "farmer": {
+      "name": "Anjali Patil",
+      "avatar": "https://images.unsplash.com/photo-1617056242132-51a82a7f4464?q=80&w=250",
+      "featured": true
+    }
+  },
+  {
+    "id": 7,
+    "name": "Shimla Apples",
+    "type": "Fruit",
+    "price": 150,
+    "unit": "kg",
+    "location": "Shimla, HP",
+    "image": "https://images.unsplash.com/photo-1567306226416-28f0efdc88ce?q=80&w=2070",
+    "bestseller": true,
+    "distance": 95,
+    "farmer": {
+      "name": "Vikram Singh",
+      "avatar": "https://images.unsplash.com/photo-1620992389896-83a597371550?q=80&w=250",
+      "featured": false
+    }
+  },
+  {
+    "id": 8,
+    "name": "Chickpeas (Chana)",
+    "type": "Grain",
+    "price": 85,
+    "unit": "kg",
+    "location": "Indore, MP",
+    "image": "https://images.unsplash.com/photo-1632424075727-023a9d356198?q=80&w=1964",
+    "bestseller": false,
+    "distance": 70,
+    "farmer": {
+      "name": "Ravi Sharma",
+      "avatar": "https://images.unsplash.com/photo-1622256519395-97303c03534b?q=80&w=250",
+      "featured": true
+    }
+  },
+  {
+    "id": 9,
+    "name": "Fresh Ginger",
+    "type": "Vegetable",
+    "price": 90,
+    "unit": "kg",
+    "location": "Wayanad, Kerala",
+    "image": "https://images.unsplash.com/photo-1622320184224-2c702d7d7164?q=80&w=1974",
+    "bestseller": false,
+    "distance": 150,
+    "farmer": {
+      "name": "Suresh Yadav",
+      "avatar": "https://images.unsplash.com/photo-1594939744113-1ab527c73259?q=80&w=250",
+      "featured": true
+    }
+  },
+  {
+    "id": 10,
+    "name": "Green Cabbages",
+    "type": "Vegetable",
+    "price": 35,
+    "unit": "piece",
+    "location": "Ooty, Tamil Nadu",
+    "image": "https://images.unsplash.com/photo-1561587340-9a3d4d9a2633?q=80&w=2070",
+    "bestseller": false,
+    "distance": 180,
+    "farmer": {
+      "name": "Priya Murthy",
+      "avatar": "https://images.unsplash.com/photo-1620757201383-372579a3b632?q=80&w=250",
+      "featured": false
+    }
+  },
+  {
+    "id": 11,
+    "name": "Sweet Corn",
+    "type": "Vegetable",
+    "price": 50,
+    "unit": "pack",
+    "location": "Belgaum, Karnataka",
+    "image": "https://images.unsplash.com/photo-1598164016422-75d8624237d1?q=80&w=2070",
+    "bestseller": true,
+    "distance": 8,
+    "farmer": {
+      "name": "Anjali Patil",
+      "avatar": "https://images.unsplash.com/photo-1617056242132-51a82a7f4464?q=80&w=250",
+      "featured": true
+    }
+  },
+  {
+    "id": 12,
+    "name": "Allahabadi Guava",
+    "type": "Fruit",
+    "price": 70,
+    "unit": "kg",
+    "location": "Prayagraj, UP",
+    "image": "https://images.unsplash.com/photo-1621281414465-9a811340b03f?q=80&w=2002",
+    "bestseller": false,
+    "distance": 35,
+    "farmer": {
+      "name": "Ravi Sharma",
+      "avatar": "https://images.unsplash.com/photo-1622256519395-97303c03534b?q=80&w=250",
+      "featured": true
+    }
   }
 ]
