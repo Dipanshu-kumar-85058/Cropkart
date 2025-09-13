@@ -3,7 +3,45 @@ let currentLang = 'en';
 let allCrops = [];
 
 // --- TRANSLATION DATA ---
-const translations = { /* ... (no changes) ... */ };
+const translations = {
+    en: {
+        browseCrops: "Browse Crops",
+        listYourCrop: "List Your Crop",
+        signIn: "Sign In",
+        heroTitle: "Fresh from Farm to Your Table",
+        heroSubtitle: "Connect directly with farmers. Buy fresh produce.",
+        availableCrops: "Available Crops",
+        orderSuccessful: "Order Successful! ✅",
+        welcomeBack: "Welcome back",
+        listNewCrop: "List a New Crop",
+        cropNameLabel: "Crop Name",
+        locationLabel: "Location",
+        priceLabel: "Price (₹)",
+        unitLabel: "Per",
+        photoLabel: "Photo of Crop",
+        submitListing: "Submit Listing",
+        orderNow: "Order Now"
+    },
+    hi: {
+        browseCrops: "फसलें देखें",
+        listYourCrop: " अपनी फसल बेचें",
+        signIn: "साइन इन करें",
+        heroTitle: "खेत से सीधे आपकी मेज पर",
+        heroSubtitle: "किसानों से सीधे जुड़ें। ताज़ा उपज खरीदें।",
+        availableCrops: "उपलब्ध फसलें",
+        orderSuccessful: "ऑर्डर सफल! ✅",
+        welcomeBack: "वापसी पर स्वागत है",
+        listNewCrop: "एक नई फसल सूचीबद्ध करें",
+        cropNameLabel: "फ़सल का नाम",
+        locationLabel: "स्थान",
+        priceLabel: "कीमत (₹)",
+        unitLabel: "प्रति",
+        photoLabel: "फसल की तस्वीर",
+        submitListing: "लिस्टिंग जमा करें",
+        orderNow: "अभी ऑर्डर करें"
+    }
+};
+;
 
 // --- INITIALIZATION ---
 document.addEventListener('DOMContentLoaded', () => {
@@ -234,4 +272,5 @@ function handleLogin(event) {
         errorDiv.style.display = 'block';
     }
 }
+
 
