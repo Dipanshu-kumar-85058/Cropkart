@@ -1,78 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>CropKart</title>
-  <link rel="stylesheet" href="styles.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CropKart - Direct from Farm</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  
-  <div id="splash">
-    <div class="splash-content">
-      <h1 data-i18n="splashTitle">🌱 CropKart</h1>
-      <p data-i18n="splashTagline">Empowering Farmers, Connecting Communities</p>
-      <div class="loader"></div>
-    </div>
-  </div>
 
-  <div id="roleSelect" class="hidden">
-    <div class="login-box">
-      <h2 data-i18n="welcomeMsg">Welcome to CropKart</h2>
-      <p data-i18n="selectRole">Select your role:</p>
-      <button onclick="showRoleForm('farmer')" data-i18n="farmerBtn">👨‍🌾 Farmer</button>
-      <button onclick="showRoleForm('consumer')" data-i18n="consumerBtn">🛒 Consumer</button>
-    </div>
-  </div>
-
-  <div id="farmerForm" class="hidden">
-    <div class="login-box">
-      <h2 data-i18n="farmerLoginTitle">Farmer Login</h2>
-      <input type="text" id="farmerName" data-i18n-placeholder="fullNamePlaceholder" />
-      <input type="email" id="farmerEmail" data-i18n-placeholder="emailPlaceholder" />
-      <input type="password" id="farmerPass" data-i18n-placeholder="passwordPlaceholder" />
-      <button onclick="loginUser('farmer')" data-i18n="loginBtn">Login</button>
-    </div>
-  </div>
-
-  <div id="consumerForm" class="hidden">
-    <div class="login-box">
-      <h2 data-i18n="consumerLoginTitle">Consumer Login</h2>
-      <input type="email" id="consumerEmail" data-i18n-placeholder="emailPlaceholder" />
-      <input type="password" id="consumerPass" data-i18n-placeholder="passwordPlaceholder" />
-      <button onclick="loginUser('consumer')" data-i18n="loginBtn">Login</button>
-    </div>
-  </div>
-
-  <div id="marketplace" class="hidden">
-    <header>
-      <h1 data-i18n="marketplaceTitle">🌾 CropKart Marketplace</h1>
-      <div class="toolbar">
-        <input type="text" id="searchBar" data-i18n-placeholder="searchPlaceholder" onkeyup="filterCrops()" />
-        <select id="sortSelect" onchange="sortCrops()">
-          <option value="default" data-i18n="sortBy">Sort By</option>
-          <option value="priceLow" data-i18n="priceLowHigh">Price: Low → High</option>
-          <option value="priceHigh" data-i18n="priceHighLow">Price: High → Low</option>
-          <option value="name" data-i18n="nameAZ">Name A-Z</option>
-        </select>
-        <button id="langToggleBtn" onclick="toggleLanguage()">हिन्दी</button>
-        <button id="listCropBtn" class="hidden" onclick="toggleForm()" data-i18n="postCropBtn">+ Post Crop</button>
-      </div>
+    <header class="navbar">
+        <a href="#" class="logo" onclick="showPage('homePage')">CropKart 🧑‍🌾</a>
+        <nav class="nav-links">
+            <a onclick="showPage('browsePage')" data-lang-key="browseCrops">Browse Crops</a>
+        </nav>
+        <div class="nav-buttons">
+            <button id="lang-switcher" onclick="toggleLanguage()">हिन्दी</button>
+            <a href="#" class="btn-list-crop" onclick="showModal('listCropModal')" data-lang-key="listYourCrop">List Your Crop</a>
+            <a href="#" class="btn-signin" onclick="showPage('loginPage')" data-lang-key="signIn">Sign In</a>
+        </div>
     </header>
 
-    <div id="postForm" class="hidden form-box">
-      <h2 data-i18n="postCropFormTitle">Post a New Crop</h2>
-      <input type="text" id="newCropName" data-i18n-placeholder="cropNamePlaceholder" />
-      <input type="text" id="newCropPrice" data-i18n-placeholder="pricePlaceholder" />
-      <input type="text" id="newCropImg" data-i18n-placeholder="imageURLPlaceholder" />
-      <button onclick="addCrop()" data-i18n="submitBtn">Submit</button>
+    <div id="app">
+        <div id="homePage" class="page active">
+            <section class="hero text-center">
+                <h1 class="main-heading" data-lang-key="heroTitle">Fresh from Farm to Your Table</h1>
+                <p class="sub-heading" data-lang-key="heroSubtitle">Connect directly with farmers. Buy fresh produce.</p>
+            </section>
+        </div>
+        <div id="browsePage" class="page">
+            <div class="container browse-layout">
+                <main class="results-panel">
+                    <h2 id="resultsTitle" data-lang-key="availableCrops">Available Crops</h2>
+                    <div class="crop-grid" id="cropGrid"></div>
+                </main>
+            </div>
+        </div>
+        <div id="loginPage" class="page">
+            <div class="login-container">
+                <h2 class="main-heading text-center" data-lang-key="welcomeBack">Welcome back</h2>
+            </div>
+        </div>
+    </div>
+    
+    <div id="listCropModal" class="modal-overlay">
+        <div class="modal-content">
+            <span class="close-button" onclick="hideModal('listCropModal')">&times;</span>
+            <h2 data-lang-key="listNewCrop">List a New Crop</h2>
+            <form id="listCropForm">
+                <div class="form-group"><label for="cropName" data-lang-key="cropNameLabel">Crop Name</label><input type="text" id="cropName" required></div>
+                <div class="form-group"><label for="location" data-lang-key="locationLabel">Location</label><input type="text" id="location" required></div>
+                <div class="form-group form-inline">
+                    <div><label for="price" data-lang-key="priceLabel">Price (₹)</label><input type="number" id="price" required></div>
+                    <div><label for="unit" data-lang-key="unitLabel">Per</label><input type="text" id="unit" placeholder="e.g., kg, quintal, dozen" required></div>
+                </div>
+                <div class="form-group"><label for="cropImage" data-lang-key="photoLabel">Photo of Crop</label><input type="file" id="cropImage" accept="image/*"></div>
+                <button type="submit" class="btn-submit" data-lang-key="submitListing">Submit Listing</button>
+            </form>
+        </div>
     </div>
 
-    <main>
-      <section id="listings"></section>
-    </main>
-  </div>
+    <div id="orderSuccessModal" class="modal-overlay">
+        <div class="modal-content text-center">
+            <span class="close-button" onclick="hideModal('orderSuccessModal')">&times;</span>
+            <h2 data-lang-key="orderSuccessful">Order Successful! ✅</h2>
+            <div id="orderDetails">
+                </div>
+        </div>
+    </div>
 
-  <script src="app.js"></script>
+    <script src="app.js" defer></script>
 </body>
 </html>
